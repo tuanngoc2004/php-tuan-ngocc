@@ -1,7 +1,13 @@
+@extends('includes.main')
+
+@section('content')
 <div class="container">
     <h1>Task List</h1>
-    <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3">Create Tasks</a>
-    <a href="{{ route('tasks.exportExcel') }}" class="btn btn-success mb-3">Export Excel</a>
+    <div>
+        <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3" style="margin-right: 10px; margin-top : 20px">Create Tasks</a>
+        <a href="{{ route('task') }}" class="btn btn-primary" style="margin-left: 10px; margin-buttom: 40px;">Export to Excel</a>
+    </div>
+
     <div class="row mb-3">
         <div class="col-md-6">
             <form action="{{ route('tasks.index') }}" method="GET">
@@ -64,6 +70,8 @@
             </form>
         </div>
     </div>
+    @csrf
+    <a href="{{ route('task') }}" class="btn btn-primary">Export to Excel</a>
     <table class="table">
         <thead>
             <tr>
@@ -123,3 +131,4 @@
     </table>
     {{ $tasks->links() }}
 </div>
+@endsection

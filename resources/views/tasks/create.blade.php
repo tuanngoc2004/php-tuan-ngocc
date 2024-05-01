@@ -1,5 +1,10 @@
+@extends('includes.main')
+
+@section('content')
+
 <div class="container">
     <h1>Create New Task</h1>
+    @include('includes.alert')
     <form action="{{ route('tasks.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -56,3 +61,5 @@
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>
+
+@endsection

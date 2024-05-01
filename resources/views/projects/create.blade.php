@@ -1,3 +1,7 @@
+@extends('includes.main')
+
+@section('content')
+
 <div class="container">
     <h1>Create New Project</h1>
     <form action="{{ route('projects.store') }}" method="POST">
@@ -33,3 +37,5 @@
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>
+
+@endsection

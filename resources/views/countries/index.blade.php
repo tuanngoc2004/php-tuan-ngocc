@@ -49,36 +49,42 @@
 </html> --}}
 
 
+@extends('includes.main')
 
-<x-atoms.title>Countries</x-atoms.title>
-<x-atoms.button class="btn-primary mb-3">
-    Create New Country
-</x-atoms.button>
-<x-molecules.table>
-    <x-atoms.thead>
-        <x-atoms.th>Name</x-atoms.th>
-        <x-atoms.th>Code</x-atoms.th>
-        <x-atoms.th>Description</x-atoms.th>
-        <x-atoms.th>Action</x-atoms.th>
-    </x-atoms.thead>
-    <tbody>
-        @foreach($countries as $country)
-        <tr>
-            <x-atoms.td>{{ $country->name }}</x-atoms.td>
-            <x-atoms.td>{{ $country->code }}</x-atoms.td>
-            <x-atoms.td>{{ $country->description }}</x-atoms.td>
-            <x-atoms.td>
-                <form action="{{ route('countries.edit', $country->id) }}" method="GET" style="display: inline-block;">
-                    @csrf
-                    <x-atoms.button class="btn-primary">Edit</x-atoms.button>
-                </form>
-                <form action="{{ route('countries.destroy', $country->id) }}" method="POST" style="display: inline-block;">
-                    @csrf
-                    @method('DELETE')
-                    <x-atoms.button class="btn-danger" onclick="return confirm('Are you sure you want to delete this country?')">Delete</x-atoms.button>
-                </form>
-            </x-atoms.td>
-        </tr>
-        @endforeach
-    </tbody>
-</x-molecules.table>
+@section('content')
+    
+    <x-atoms.title>Countries</x-atoms.title>
+    <form id="createCountryForm" action="{{ route('countries.create') }}" {{-- method="GET" --}}>
+        {{-- @csrf --}}
+        <x-atoms.button class="btn-primary mb-3">Create New Country</x-atoms.button>
+    </form>
+    <x-molecules.table>
+        <x-atoms.thead>
+            <x-atoms.th>Name</x-atoms.th>
+            <x-atoms.th>Code</x-atoms.th>
+            <x-atoms.th>Description</x-atoms.th>
+            <x-atoms.th>Action</x-atoms.th>
+        </x-atoms.thead>
+        <tbody>
+            @foreach($countries as $country)
+            <tr>
+                <x-atoms.td>{{ $country->name }}</x-atoms.td>
+                <x-atoms.td>{{ $country->code }}</x-atoms.td>
+                <x-atoms.td>{{ $country->description }}</x-atoms.td>
+                <x-atoms.td>
+                    <form action="{{ route('countries.edit', $country->id) }}" {{-- method="GET" --}} style="display: inline-block;">
+                        {{-- @csrf --}}
+                        <x-atoms.button class="btn-primary">Edit</x-atoms.button>
+                    </form>
+                    <form action="{{ route('countries.destroy', $country->id) }}" method="POST" style="display: inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <x-atoms.button class="btn-danger" onclick="return confirm('Are you sure you want to delete this country?')">Delete</x-atoms.button>
+                    </form>
+                </x-atoms.td>
+            </tr>
+            @endforeach
+        </tbody>
+    </x-molecules.table>
+
+@endsection

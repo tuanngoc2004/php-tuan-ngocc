@@ -10,10 +10,14 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Services\TaskService;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TasksExport;
 
 class TaskController extends Controller
 {
     protected $taskService;
+    protected $excelExportService;
 
     public function __construct(TaskService $taskService)
     {
@@ -69,4 +73,8 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
     }
 
+    public function exportTask()
+    {
+        return Excel::download(new TasksExport, 'tasks.xlsx');
+    }
 }

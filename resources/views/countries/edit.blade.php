@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Country</title>
-</head>
-<body>
+@extends('includes.main')
+
+@section('content')
     <h1>Edit Country</h1>
+    @include('includes.alert')
     <form action="{{ route('countries.update', $country->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div>
             <label for="code">Code:</label>
-            <input type="text" name="code" id="code" value="{{ $country->code }}" required>
+            <input type="text" name="code" id="code" value="{{ $country->code }}" class="form-control" required>
         </div>
         <div>
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="{{ $country->name }}" required>
+            <input type="text" name="name" id="name" value="{{ $country->name }}" class="form-control" required>
         </div>
         <div>
             <label for="description">Description:</label>
-            <input type="text" name="description" id="description" value="{{ $country->description }}">
+            <input type="text" name="description" id="description" class="form-control" value="{{ $country->description }}">
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
-</body>
-</html>
+
+@endsection
